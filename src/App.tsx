@@ -14,10 +14,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
           <Route path="/users/:id" element={<UserDetails />} />
-           
-           <Route path="/" element={<Hometask1 />} />
-            <Route path="/usertask1" element={<Usertask1 />} />
-            <Route path="/usertask1/:id" element={<Usertask1 />} />
+
+          <Route path="/" element={<Hometask1 />} />
+          <Route path="/usertask1" element={<Usertask1 />} />
+          <Route path="/usertask1/:id" element={<Usertask1 />} />
         </Routes>
       </BrowserRouter>
     </>
