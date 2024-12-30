@@ -10,7 +10,7 @@ const Home = () => {
   const names: NameProps[] = [
     { navName: "Ved", navLink: "/user" },
     { navName: "Dhanusree", navLink: "/user" },
-    { navName: "Jaya Chandra", navLink: "/user" },
+    { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
   return (
     <div className="HomeBackground">

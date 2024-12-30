@@ -1,0 +1,46 @@
+body {
+    background-color: #c7b8c871; 
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-top: 40px;
+ }
+
+ .headding{
+        font-size: 60px;
+        font-style: italic;
+        color: rgb(28, 4, 28);
+        margin-top: 50px;
+     
+ }
+
+ .name{
+   font-size: 50px;
+   font-weight:inherit;
+   font-style: oblique;
+   font-variant: small-caps;
+   color: rgb(240, 11, 106);
+   margin-top: 80px;
+ }
+
+ .btn-user{
+   width: 100px;
+    padding: 20px;
+    font-size: 25px;
+    margin: 15px 0;
+    display: inline-block;
+    border: 1px solid none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: rgba(29, 86, 29, 0.67);
+    color: white;
+    margin-top: 50px;
+ }
+
+ .btn-user:hover{
+   background-color: green;
+   font-size: 45px;
+   width: 150px;
+ }
+
+
+ 
