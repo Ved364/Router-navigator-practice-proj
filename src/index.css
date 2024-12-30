@@ -1,0 +1,94 @@
+.UserBackgroundImg {
+  background-image: url('./assets/user.webp');
+}
+
+.userBackground {
+  margin: 0;
+  height: 100vh;
+  background-size: cover;
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+.content_table {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.189);
+  backdrop-filter: blur(10px);
+  border-collapse: collapse;
+  width: 120vh;
+  margin: 25px auto;
+  font-size: 18px;
+  min-width: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.content_table thead tr {
+  background-color: #00987aa3;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  backdrop-filter: blur(40px);
+}
+
+.content_table th, .content_table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.content_table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  font-size: 15px;
+}
+
+.content_table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f32a;
+  backdrop-filter: blur(10px);
+}
+
+.background_table {
+  height: 80vh;
+  background-size: cover;
+}
+
+.content_table tbody tr:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.buttonStyle {
+  background-color: white;
+  background: transparent;
+  height: 4vh;
+  background-size: cover;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.postBackgroundImg {
+  background-image: url('./assets/post.avif');
+}
+
+.HomeBackground {
+  background-image: url('./assets/frontPage.jpg');
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+.HomeHeading {
+  font-size: 86px;
+  text-align: center;
+  color: red;
+}
+
+.homeBackground {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
