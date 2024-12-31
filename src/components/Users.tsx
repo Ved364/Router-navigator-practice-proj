@@ -10,18 +10,18 @@ type User = {
   email: string;
 };
 
-type NameProps = {
+type Name = {
   navName: string;
   navLink: string;
 };
 
-const User = () => {
-  const names: NameProps[] = [
+const Users = () => {
+  const names: Name[] = [
     { navName: "Dhanusree", navLink: "/user" },
     { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
 
-  const [data, setData] = useState([] as User[]);
+  const [data, setData] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5;
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const User = () => {
   };
 
   const handleRowsChange = (userId: number) => {
-    navigate(`/users/${userId}`);
+    navigate(`/user/${userId}`);
   };
 
   const handleUserpage = () => {
@@ -52,26 +52,23 @@ const User = () => {
   return (
     <div className="userBackground UserBackgroundImg">
       <div className="buttonStyle">
-        <div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleUserpage}
-          >
-            Back
-          </button>
-        </div>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleUserpage}
+        >
+          Back
+        </button>
         <div className="d-flex gap-3">
-          {names.map((itemName) => (
-            <div>
-              <button
-                type="button"
-                onClick={() => navigate(itemName.navLink)}
-                className="btn btn-primary"
-              >
-                {itemName.navName}
-              </button>
-            </div>
+          {names.map((itemName, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => navigate(itemName.navLink)}
+              className="btn btn-primary"
+            >
+              {itemName.navName}
+            </button>
           ))}
         </div>
       </div>
@@ -107,4 +104,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Users;

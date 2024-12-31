@@ -1,4 +1,4 @@
-import User from "./components/User";
+import Users from "./components/Users";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserDetails from "./components/UserDetails";
 import Home from "./components/Home";
@@ -12,8 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/users/:id" element={<UserDetails />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/user/:id" element={<UserDetails />} />
 
           <Route path="/" element={<Hometask1 />} />
           <Route path="/usertask1" element={<Usertask1 />} />
