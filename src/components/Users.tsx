@@ -17,7 +17,7 @@ type Name = {
 
 const Users = () => {
   const names: Name[] = [
-    { navName: "Dhanusree", navLink: "/user" },
+    { navName: "Dhanusree", navLink: "/albums" },
     { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
 
