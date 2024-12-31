@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 type User = {
   id: number;
@@ -22,12 +22,16 @@ const Users = () => {
   ];
 
   const [data, setData] = useState<User[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const initialPage = parseInt(query.get("page") || "1", 10);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 5;
   const navigate = useNavigate();
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    navigate(`?page=${pageNumber}`);
   };
 
   const handleRowsChange = (userId: number) => {

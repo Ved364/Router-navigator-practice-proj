@@ -10,7 +10,7 @@ type Address = {
   geo: { lat: string; lng: string };
 };
 
-type UserDetailProps = {
+type UserDetails = {
   id: number;
   username: string;
   name: string;
@@ -23,7 +23,7 @@ type UserDetailProps = {
 
 const UserDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const [user, setUser] = useState<UserDetailProps | null>(null);
+  const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
