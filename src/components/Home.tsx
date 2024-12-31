@@ -8,8 +8,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const names: NameProps[] = [
-    { navName: "Ved", navLink: "/user" },
-    { navName: "Dhanusree", navLink: "/user" },
+    { navName: "Ved", navLink: "/users" },
+    { navName: "Dhanusree", navLink: "/albums" },
     { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
   return (

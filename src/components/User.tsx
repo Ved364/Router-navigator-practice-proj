@@ -17,8 +17,8 @@ type NameProps = {
 
 const User = () => {
   const names: NameProps[] = [
-    { navName: "Dhanusree", navLink: "/user" },
-    { navName: "Jaya Chandra", navLink: "/user" },
+    { navName: "Dhanusree", navLink: "/albums" },
+    { navName: "Jaya Chandra", navLink: "/usertask1" },
   ];
 
   const [data, setData] = useState([] as User[]);
@@ -31,7 +31,7 @@ const User = () => {
   };
 
   const handleRowsChange = (userId: number) => {
-    navigate(`/users/${userId}`);
+    navigate(`/user/${userId}`);
   };
 
   const handleUserpage = () => {
@@ -62,8 +62,8 @@ const User = () => {
           </button>
         </div>
         <div className="d-flex gap-3">
-          {names.map((itemName) => (
-            <div>
+          {names.map((itemName, i) => (
+            <div key={i}>
               <button
                 type="button"
                 onClick={() => navigate(itemName.navLink)}

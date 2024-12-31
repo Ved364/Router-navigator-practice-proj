@@ -1,27 +1,31 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import "./myfile.css";
-
-type Album = {
+import "./albums.css";
+import { useNavigate } from "react-router-dom";
+type Albumtype = {
   userId: number;
   id: number;
   title: string;
 };
 
-const Page1 = () => {
-  const [Data, setData] = useState([] as Album[]);
+const Albums = () => {
+  const [data, setData] = useState<Albumtype[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
   const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = Data.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(Data.length / recordsPerPage);
+  const startIndex = lastIndex - recordsPerPage;
+  const records = data.slice(startIndex, lastIndex);
+  const npage = Math.ceil(data.length / recordsPerPage);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/albums").then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get("https://jsonplaceholder.typicode.com/albums")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const prePage = () => {
@@ -35,13 +39,25 @@ const Page1 = () => {
     }
   };
 
+  const handleNavId = (id: number) => {
+    navigate(`/album/${id}`);
+  };
+
+  const tablebody = records.map((album: Albumtype) => (
+    <tr key={album.id} onClick={() => handleNavId(album.id)}>
+      <td>{album.userId}</td>
+      <td>{album.id}</td>
+      <td>{album.title}</td>
+    </tr>
+  ));
+
   return (
     <>
       <Navbar />
       <div className="container">
         <div className="table-1">
-          <h3>Details of Users</h3>
-          <table>
+          <h3 className="dh3">Details of Users</h3>
+          <table className="d-table">
             <thead>
               <tr>
                 <th>USERID</th>
@@ -49,15 +65,7 @@ const Page1 = () => {
                 <th>TITLE</th>
               </tr>
             </thead>
-            <tbody>
-              {records.map((album) => (
-                <tr key={album.id}>
-                  <td>{album.userId}</td>
-                  <td>{album.id}</td>
-                  <td>{album.title}</td>
-                </tr>
-              ))}
-            </tbody>
+            <tbody>{tablebody}</tbody>
           </table>
           <nav>
             <div className="buttons">
@@ -90,4 +98,4 @@ const Page1 = () => {
   );
 };
 
-export default Page1;
+export default Albums;
