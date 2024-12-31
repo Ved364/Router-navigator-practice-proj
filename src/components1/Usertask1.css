@@ -38,7 +38,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin: 30px 0;
-    width: 80vw;
+    width: 65vw;
     
   }
   
@@ -46,11 +46,11 @@ body {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid  #844e4e;
-    text-align: center;
+    /* text-align: center; */
   }
   
   th {
-    background-color: green;
+    background-color: rgb(72, 156, 72);
     color: white;
     text-align: center;
 
