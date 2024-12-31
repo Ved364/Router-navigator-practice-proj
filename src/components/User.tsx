@@ -18,7 +18,7 @@ type NameProps = {
 const User = () => {
   const names: NameProps[] = [
     { navName: "Dhanusree", navLink: "/user" },
-    { navName: "Jaya Chandra", navLink: "/user" },
+    { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
 
   const [data, setData] = useState([] as User[]);
