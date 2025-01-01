@@ -55,7 +55,7 @@ const Users = () => {
   }, []);
   return (
     <div className="userBackground UserBackgroundImg">
-      <div className="buttonStyle">
+      <div className="UsersButton">
         <button
           type="button"
           className="btn btn-primary"
@@ -63,7 +63,7 @@ const Users = () => {
         >
           Back
         </button>
-        <div className="d-flex gap-3">
+        <div>
           {names.map((itemName, i) => (
             <button
               key={i}

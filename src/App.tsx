@@ -7,12 +7,14 @@ import Usertask1 from "./components1/Usertask1";
 
 import Albums from "./Dcomponents/Albums";
 import AlbumId from "./Dcomponents/AlbumId";
+import Login from "./components/Login";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/users" element={<Users />} />
           <Route path="/user/:id" element={<UserDetails />} />
