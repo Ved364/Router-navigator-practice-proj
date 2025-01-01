@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, useNavigate, useParams } from 'react-router-dom';
+import {Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import './Usertask1.css';
 
 const URL = "https://jsonplaceholder.typicode.com/users";
@@ -26,7 +26,12 @@ interface User {
 const Usertask1:React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const location = useLocation(); 
+  const queryParams = new URLSearchParams(location.search); 
+  const initialPage = parseInt(queryParams.get('page') || '1', 10); 
+  const [currentPage, setCurrentPage] = useState(initialPage);
+
   const [userData, setUserData] = useState<User[]>([]);
   const [userDetail, setUserDetail] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
@@ -39,28 +44,26 @@ const Usertask1:React.FC = () => {
     setIsError({status:false, msg:""})
     try {
       const response = await fetch(apiURL);
+      if(response.status === 404){
+      throw new Error("data not found");
+    }
     const data = await response.json();
     setUserData(data);
     setLoading(false);
     setIsError({status:false, msg:""});
-    if(response.status === 404){
-      throw new Error("data not found");
-    }
       
-    
     } catch (error) {
-     
-      setLoading(false);
+       setLoading(false);
        setIsError({status:true, msg: (error as Error).message ||"something went wrong, please try again!"})
     }
   };
 
-  const fetchUserDetail = async (userId: string) => { 
+  const fetchUserDetail = async (userId: string) => {
     setLoading(true); 
     setIsError({ status: false, msg: "" }); 
     
     try { 
-      const response = await fetch(`${URL}/${userId}`); 
+      const response = await fetch(`${URL}/${userId}`);
     if (response.status === 404) { 
       throw new Error("User not found"); 
     } 
@@ -82,6 +85,20 @@ const Usertask1:React.FC = () => {
     }
    },[id]);
 
+   useEffect(() => {
+     if (!id) {
+       fetchUserData(URL); 
+      } 
+    }, [currentPage]); 
+
+
+   useEffect(() => {
+     if (location.search) {
+       const page = parseInt(queryParams.get('page') || '1', 10); 
+       setCurrentPage(page); 
+      } 
+    }, [location.search]);
+
 
 
    const indexOfLastUser = currentPage * usersPerPage; 
@@ -94,6 +111,7 @@ const Usertask1:React.FC = () => {
 
    const handlePageChange = (pageNumber: number) => { 
     setCurrentPage(pageNumber);
+    navigate(`/usertask1?page=${pageNumber}`);
   };
   
 
@@ -120,7 +138,7 @@ const Usertask1:React.FC = () => {
   if (id && userDetail) { 
     return (
        <div className="container"> 
-       <button className="btn-back" onClick={() => navigate('/')}>Back</button> 
+       <button className="btn-back" onClick={() => navigate('/Usertask1')}>Back</button> 
        <h1>User Details</h1> 
        <table style={{ border: "2px solid black", borderCollapse: "collapse" }}> 
         <thead> 
@@ -176,7 +194,7 @@ const Usertask1:React.FC = () => {
             const{id, name, username, email, address} = eachUser;
             return (
             <tr key ={id}>
-              <td><Link to={`/user/${id}`}>{id}</Link></td>  
+              <td><Link to={`/usertask1/${id}`}>{id}</Link></td>  
              <td>{name}</td>  
              <td>{username}</td> 
             <td>{email}</td>
@@ -199,6 +217,7 @@ const Usertask1:React.FC = () => {
           className="btn-pagination" 
           onClick={() => handlePageChange(index + 1)} 
           disabled={currentPage === index + 1} > {index + 1} 
+           
           </button> ))} 
       </div>
 
@@ -208,3 +227,6 @@ const Usertask1:React.FC = () => {
   );
 };
 export default Usertask1;
+
+
+
