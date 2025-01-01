@@ -1,45 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GetItem from "./GetItem";
-
-type FormEvent = React.FormEvent<HTMLFormElement>;
-
-type User = {
-  email: string;
-  password: string;
-};
 
 const Login = () => {
-  const [, setLogin] = useState<boolean>(false);
-  const [, setData] = useState<User[]>([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setData(GetItem());
-  }, []);
-
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = (e.target as HTMLFormElement).email.value;
-    const password = (e.target as HTMLFormElement).password.value;
-    if (email && password) {
-      const users = GetItem();
-      for (const val of users) {
-        if (val.email.includes(email)) {
-          setLogin(true);
-          if (val.email === email && val.password === password) {
-            localStorage.setItem("currentUser", JSON.stringify(val));
-            navigate("/");
-          } else if (val.email !== email) {
-            alert(`${email} does not exist`);
-          } else {
-            alert("Password is incorrect");
-          }
-          return;
-        }
-      }
-      alert("User doesnot exist. Please Signup.");
-    }
+
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", password);
+
+    setEmail("");
+
+    setPassword("");
+
+    alert("Login details saved!");
+
+    navigate("/home");
   };
   return (
     <div className="loginPageBackground">

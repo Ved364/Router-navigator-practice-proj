@@ -25,6 +25,13 @@ const Home = () => {
             {itemName.navName}
           </button>
         ))}
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => navigate("/")}
+        >
+          Log out
+        </button>
       </div>
       <div className="homeBackground">
         <h1 className="HomeHeading">

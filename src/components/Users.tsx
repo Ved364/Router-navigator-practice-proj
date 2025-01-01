@@ -39,7 +39,7 @@ const Users = () => {
   };
 
   const handleUserpage = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const indexOfLastRow = currentPage * rowsPerPage;

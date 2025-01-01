@@ -111,7 +111,7 @@ const Usertask1: React.FC = () => {
   if (id && userDetail) {
     return (
       <div className="container">
-        <button className="btn-back" onClick={() => navigate("/")}>
+        <button className="btn-back" onClick={() => navigate(-1)}>
           Back
         </button>
         <h1>User Details</h1>
@@ -140,7 +140,7 @@ const Usertask1: React.FC = () => {
     );
   }
 
-  const handleBackClick = () => navigate("/");
+  const handleBackClick = () => navigate(-1);
 
   return (
     <>
