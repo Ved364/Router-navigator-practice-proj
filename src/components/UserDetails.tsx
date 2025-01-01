@@ -10,7 +10,7 @@ type Address = {
   geo: { lat: string; lng: string };
 };
 
-type UserDetailProps = {
+type UserDetails = {
   id: number;
   username: string;
   name: string;
@@ -22,9 +22,9 @@ type UserDetailProps = {
 };
 
 const UserDetails = () => {
-  const { id } = useParams() as { id: string };
-  const [user, setUser] = useState(null as UserDetailProps | null);
-  const [loading, setLoading] = useState(true);
+  const { id } = useParams<{ id: string }>();
+  const [user, setUser] = useState<UserDetails | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const UserDetails = () => {
   }, [id]);
 
   const handleUserpage = () => {
-    navigate("/user");
+    navigate("/users");
   };
 
   if (loading) {

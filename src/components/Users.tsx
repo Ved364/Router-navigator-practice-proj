@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 type User = {
   id: number;
@@ -10,32 +10,36 @@ type User = {
   email: string;
 };
 
-type NameProps = {
+type Name = {
   navName: string;
   navLink: string;
 };
 
-const User = () => {
-  const names: NameProps[] = [
-    { navName: "Dhanusree", navLink: "/user" },
+const Users = () => {
+  const names: Name[] = [
+    { navName: "Dhanusree", navLink: "/albums" },
     { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
 
-  const [data, setData] = useState([] as User[]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState<User[]>([]);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const initialPage = parseInt(query.get("page") || "1", 10);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 5;
   const navigate = useNavigate();
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    navigate(`?page=${pageNumber}`);
   };
 
   const handleRowsChange = (userId: number) => {
-    navigate(`/users/${userId}`);
+    navigate(`/user/${userId}`);
   };
 
   const handleUserpage = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -51,27 +55,24 @@ const User = () => {
   }, []);
   return (
     <div className="userBackground UserBackgroundImg">
-      <div className="buttonStyle">
+      <div className="UsersButton">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleUserpage}
+        >
+          Back
+        </button>
         <div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleUserpage}
-          >
-            Back
-          </button>
-        </div>
-        <div className="d-flex gap-3">
-          {names.map((itemName) => (
-            <div>
-              <button
-                type="button"
-                onClick={() => navigate(itemName.navLink)}
-                className="btn btn-primary"
-              >
-                {itemName.navName}
-              </button>
-            </div>
+          {names.map((itemName, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => navigate(itemName.navLink)}
+              className="btn btn-primary"
+            >
+              {itemName.navName}
+            </button>
           ))}
         </div>
       </div>
@@ -107,4 +108,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Users;

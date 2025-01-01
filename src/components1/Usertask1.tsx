@@ -4,26 +4,22 @@ import './Usertask1.css';
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 
-interface Address { 
-  street: string; 
-  suite: string; 
-  city: string; 
-  zipcode: string; 
-} 
+interface Address {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+}
 
-interface User { 
-  id: number; 
-  name: string; 
-  username: string; 
-  email: string; 
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
   address: Address;
 }
 
-
-
-
-
-const Usertask1:React.FC = () => {
+const Usertask1: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
@@ -35,13 +31,13 @@ const Usertask1:React.FC = () => {
   const [userData, setUserData] = useState<User[]>([]);
   const [userDetail, setUserDetail] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
-  const [isError, setIsError] = useState({status:false, msg:""})
+  const [isError, setIsError] = useState({ status: false, msg: "" });
 
   const usersPerPage = 2;
 
-  const fetchUserData = async(apiURL:string) =>{
+  const fetchUserData = async (apiURL: string) => {
     setLoading(true);
-    setIsError({status:false, msg:""})
+    setIsError({ status: false, msg: "" });
     try {
       const response = await fetch(apiURL);
       if(response.status === 404){
@@ -77,11 +73,11 @@ const Usertask1:React.FC = () => {
    } 
     };
 
-   useEffect(() =>{
-    if (id) { 
-      fetchUserDetail(id); 
+  useEffect(() => {
+    if (id) {
+      fetchUserDetail(id);
     } else {
-    fetchUserData(URL);
+      fetchUserData(URL);
     }
    },[id]);
 
@@ -101,17 +97,14 @@ const Usertask1:React.FC = () => {
 
 
 
-   const indexOfLastUser = currentPage * usersPerPage; 
-   const indexOfFirstUser = indexOfLastUser - usersPerPage; 
-   const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
-   
-   const totalPages = Math.ceil(userData.length / usersPerPage);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
 
-  
+  const totalPages = Math.ceil(userData.length / usersPerPage);
 
-   const handlePageChange = (pageNumber: number) => { 
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    navigate(`/usertask1?page=${pageNumber}`);
   };
   
 
@@ -124,18 +117,15 @@ const Usertask1:React.FC = () => {
     )
   }
 
-  if(isError?.status) {
-    return(
-    <div className='container'>
-      <h1>
-       {isError?.msg}
-      </h1>
-    </div>
-    )
+  if (isError?.status) {
+    return (
+      <div className="container">
+        <h1>{isError?.msg}</h1>
+      </div>
+    );
   }
 
-
-  if (id && userDetail) { 
+  if (id && userDetail) {
     return (
        <div className="container"> 
        <button className="btn-back" onClick={() => navigate('/Usertask1')}>Back</button> 
@@ -161,32 +151,33 @@ const Usertask1:React.FC = () => {
         </table> 
   </div> );}
 
+  const handleBackClick = () => navigate(-1);
 
-
-
-  const handleBackClick = () => navigate('/');
-  
   return (
-     <> <div className='container'>
+    <>
+      {" "}
+      <div className="container">
+        <button className="btn-back" onClick={handleBackClick}>
+          Back
+        </button>
 
-      
-      <button className='btn-back' onClick={handleBackClick}>Back</button>
+        <h1 className="header">
+          {" "}
+          <u>Users</u>
+        </h1>
 
-      <h1 className='header'> <u>Users</u></h1>
-      
-      <table  style= {{border: "2px solid black", borderCollapse: "collapse" }}>
-        <thead>
-
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>UserName</th>
-            <th>Email</th> 
-            <th>Address</th>
-          </tr>
-
-        </thead>
-      
+        <table
+          style={{ border: "2px solid black", borderCollapse: "collapse" }}
+        >
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>UserName</th>
+              <th>Email</th>
+              <th>Address</th>
+            </tr>
+          </thead>
 
       <tbody>
         {
@@ -222,8 +213,7 @@ const Usertask1:React.FC = () => {
       </div>
 
       </div>
-      </>
-      
+    </>
   );
 };
 export default Usertask1;

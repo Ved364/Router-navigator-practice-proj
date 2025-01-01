@@ -1,35 +1,31 @@
 import { useNavigate } from "react-router-dom";
+import Props from "react";
 
-// type Props = {
-//   nname: string;
-//   nLink: string;
-// };
+type Props = {
+  nname: string;
+  nLink: string;
+};
 const Navbar = () => {
   const navigate = useNavigate();
-  const buttons = [
-    { names: "Ved", nLink: "/user" },
-    { names: "Jayachandra", nLink: "/user" },
+  const buttons: Props[] = [
+    { nname: "Ved", nLink: "/users" },
+    { nname: "Jayachandra", nLink: "/Usertask1" },
   ];
 
-  //   const rowsDisplay = () => {
-  //     navigate(`/dhanu/${id}`);
-  //   };
-  //   const userPage = () => {
-  //     navigate("/");
-  //   };
+  const buttonblock = buttons.map((b) => (
+    <button className="btn" onClick={() => navigate(b.nLink)}>
+      {b.nname}
+    </button>
+  ));
   return (
     <>
       <div className="nav-bar">
         <div>
-          <button className="back-btn">Go Back</button>
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            Go Back
+          </button>
         </div>
-        <div className="nav-btn1">
-          {buttons.map((b) => (
-            <button className="btn" onClick={() => navigate(b.nLink)}>
-              {b.names}
-            </button>
-          ))}
-        </div>
+        <div className="nav-btn1">{buttonblock}</div>
       </div>
     </>
   );
