@@ -85,7 +85,7 @@ const Usertask1: React.FC = () => {
      if (!id) {
        fetchUserData(URL); 
       } 
-    }, [currentPage]); 
+    }, [currentPage, id]); 
 
 
    useEffect(() => {
@@ -93,7 +93,7 @@ const Usertask1: React.FC = () => {
        const page = parseInt(queryParams.get('page') || '1', 10); 
        setCurrentPage(page); 
       } 
-    }, [location.search]);
+    }, [location.search, queryParams]);
 
 
 
@@ -105,6 +105,7 @@ const Usertask1: React.FC = () => {
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    navigate(`?page=${pageNumber}`);
   };
   
 
