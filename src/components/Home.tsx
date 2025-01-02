@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Name = {
@@ -6,6 +7,14 @@ type Name = {
 };
 const Home = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const StoredData = localStorage.getItem("email");
+    if (StoredData) {
+      setEmail(StoredData);
+    }
+  }, []);
 
   const names: Name[] = [
     { navName: "Ved", navLink: "/users" },
@@ -14,6 +23,7 @@ const Home = () => {
   ];
   return (
     <div className="HomeBackground">
+      <h3 className="text-white text-center">{email}</h3>
       <div className="d-flex justify-content-end align-items-center gap-3 p-3">
         {names.map((itemName, i) => (
           <button

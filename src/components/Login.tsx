@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [, setEmail] = useState([]);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const email = (e.target as HTMLFormElement).email.value;
     localStorage.setItem("email", email);
     localStorage.setItem("password", password);
 
-    setEmail("");
+    setEmail(email);
 
     setPassword("");
 
