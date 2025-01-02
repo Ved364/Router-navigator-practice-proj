@@ -2,40 +2,54 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./albums.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 type Albumtype = {
   userId: number;
   id: number;
   title: string;
 };
 
-const Albums = () => {
+const AlbumsPage = () => {
   const [data, setData] = useState<Albumtype[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const location = useLocation();
+  //   console.log(location);
+  const query = new URLSearchParams(location.search);
+  console.log(query);
+  const initialPage = Number(query.get("page")) || 1;
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  //   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 10;
-  const lastIndex = currentPage * recordsPerPage;
-  const startIndex = lastIndex - recordsPerPage;
-  const records = data.slice(startIndex, lastIndex);
+  // const lastIndex = currentPage * recordsPerPage;
+  const startIndex = currentPage * recordsPerPage - recordsPerPage;
+  // const records = data.slice(startIndex, lastIndex);
   const npage = Math.ceil(data.length / recordsPerPage);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/albums")
+      .get(
+        `https://jsonplaceholder.typicode.com/albums?_start=${startIndex}&_limit=${recordsPerPage}`
+      )
       .then((res) => {
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [startIndex]);
 
   const prePage = () => {
     if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
+      navigate(`?_start=${startIndex}&_limit=${recordsPerPage}`);
+      navigate(`?page=${newPage}`);
     }
   };
   const nextPage = () => {
     if (currentPage !== npage) {
-      setCurrentPage(currentPage + 1);
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
+      navigate(`?_start=${startIndex}&_limit=${recordsPerPage}`);
+      navigate(`?page=${newPage}`);
     }
   };
 
@@ -43,7 +57,7 @@ const Albums = () => {
     navigate(`/album/${id}`);
   };
 
-  const tablebody = records.map((album: Albumtype) => (
+  const tablebody = data.map((album: Albumtype) => (
     <tr key={album.id} onClick={() => handleNavId(album.id)}>
       <td>{album.userId}</td>
       <td>{album.id}</td>
@@ -98,4 +112,4 @@ const Albums = () => {
   );
 };
 
-export default Albums;
+export default AlbumsPage;

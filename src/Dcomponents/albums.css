@@ -3,6 +3,7 @@
   display: inline-flex;
 }
 .page-link{
+  background-color: aliceblue;
   padding:10px;
   border: 1px solid black;
   text-decoration: none;
